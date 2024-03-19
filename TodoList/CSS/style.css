@@ -1,0 +1,71 @@
+.noto-sans {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.container {
+  position: relative;
+  width: 600px;
+  height: 800px;
+  border: 2px solid black;
+  margin: 50px auto;
+}
+
+.header-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 30px 10px 15px 10px;
+  justify-content: space-around;
+  border-bottom: 2px solid #cdcdcd;
+}
+
+.todo-title {
+  color: black;
+  font-size: 36px;
+}
+
+.todo-input {
+  display: flex;
+  align-items: center;
+  height: 37px;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.todo-input .fa-pen {
+  font-size: 20px;
+  padding: 0px 10px;
+}
+
+.input {
+  padding: 0;
+  margin: 0;
+  height: 36px;
+  width: 300px;
+  border: none;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+::placeholder {
+  color: #aaaaaa;
+}
+
+.input:focus {
+  outline: none;
+  background-color: #f7f7f7;
+}
+
+.add-todo {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  translate: -50%;
+  width: auto;
+  height: 36px;
+}
+
+.add-todo .fa-plus {
+  font-size: 20px;
+  background-color: none;
+}
