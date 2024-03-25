@@ -34,7 +34,7 @@ class TodoService {
     if (!this.instance) {
       this.instance = new TodoService();
     }
-    return TodoService;
+    return this.instance;
   }
 
   constructor() {
