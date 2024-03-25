@@ -5,7 +5,7 @@ interface TodoList {
 }
 
 class TodoEvent {
-  private static instance: TodoList | null = null;
+  private static instance: TodoEvent | null = null;
 
   public static getInstance(): TodoEvent {
     if (!this.instance) {
@@ -22,6 +22,14 @@ class TodoEvent {
         TodoService.getInstance().addTodoBtn();
       };
     }
+  }
+
+  deleteTodoButton(): void {
+    const deleteTodoBtn: HTMLElement | null =
+      document.querySelector(".delete-todo");
+    deleteTodoBtn.onclick = () => {
+      TodoService.getInstance().deleteTodoBtn();
+    };
   }
 }
 
@@ -55,5 +63,23 @@ class TodoService {
 
     // 해당 엘리먼트가 없으면 함수 종료
     if (!todoContent) return;
+  }
+
+  public addTodoBtn(): void {
+    const todoInput: HTMLInputElement | null =
+      document.querySelector(".add-todo");
+
+    // 입력값(todoInput)값이 없거나, 공백일 경우 - 함수 종료
+    if (!todoInput || !todoInput.value.trim()) return;
+  }
+
+  public deleteTodoBtn(): void {
+    const deleteButton: NodeListOf<HTMLElement> = document.querySelector(".delete-button");
+
+    deleteButton.forEach((deleteBtn, index) => {
+      deleteBtn.onclick = () => {
+        
+      };
+    });
   }
 }
