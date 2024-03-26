@@ -24,12 +24,15 @@ class TodoEvent {
     }
   }
 
-  deleteTodoButton(): void {
-    const deleteTodoBtn: HTMLElement | null =
-      document.querySelector(".delete-todo");
-    deleteTodoBtn.onclick = () => {
-      TodoService.getInstance().deleteTodoBtn();
-    };
+  public deleteTodoBtn(): void {
+    const deleteButton: NodeListOf<HTMLElement> =
+      document.querySelectorAll(".delete-button");
+
+    deleteButton.forEach((deleteButton, index) => {
+      deleteButton.onclick = () => {
+        TodoService.getInstance().deleteBtn()
+      }
+    })
   }
 }
 
@@ -59,7 +62,7 @@ class TodoService {
 
   public uploadTodoList(): void {
     localStorage.setItem("todoList", JSON.stringify(this.todoList));
-    this.loadTodoList
+    this.loadTodoList;
   }
 
   public loadTodoList(): void {
@@ -78,17 +81,9 @@ class TodoService {
     if (!todoInput || !todoInput.value.trim()) return;
   }
 
-  public deleteTodoBtn(): void {
-    const deleteButton: NodeListOf<HTMLElement> =
-      document.querySelectorAll(".delete-button");
+  public deleteBtn(): void {
+    const deleteBtn: HTMLElement | null = document.querySelector(".delete-todo")
 
-    deleteButton.forEach((deleteBtn, index) => {
-      deleteBtn.onclick = () => {
-        this.todoList.splice(index, 1);
 
-        localStorage.setItem("todoList", JSON.stringify(this.todoList));
-        this.loadTodoList();
-      };
-    });
   }
 }
