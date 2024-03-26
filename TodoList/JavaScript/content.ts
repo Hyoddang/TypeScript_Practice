@@ -54,10 +54,15 @@ class TodoService {
     this.todoList = storedTodos ? JSON.parse(storedTodos) : [];
 
     // 생성 시 todoList를 로드해서 화면에 표시
-    this.loadtodoList();
+    this.loadTodoList();
   }
 
-  public loadtodoList(): void {
+  public uploadTodoList(): void {
+    localStorage.setItem("todoList", JSON.stringify(this.todoList));
+    this.loadTodoList
+  }
+
+  public loadTodoList(): void {
     const todoContent: HTMLElement | null =
       document.querySelector(".todo-content");
 
@@ -74,11 +79,15 @@ class TodoService {
   }
 
   public deleteTodoBtn(): void {
-    const deleteButton: NodeListOf<HTMLElement> = document.querySelector(".delete-button");
+    const deleteButton: NodeListOf<HTMLElement> =
+      document.querySelectorAll(".delete-button");
 
     deleteButton.forEach((deleteBtn, index) => {
       deleteBtn.onclick = () => {
-        
+        this.todoList.splice(index, 1);
+
+        localStorage.setItem("todoList", JSON.stringify(this.todoList));
+        this.loadTodoList();
       };
     });
   }
