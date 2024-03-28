@@ -19,7 +19,7 @@ class TodoEvent {
     const addTodoBtn: HTMLElement | null = document.querySelector(".add-todo");
     if (addTodoBtn) {
       addTodoBtn.onclick = () => {
-        TodoService.getInstance().addTodoBtn();
+        TodoService.getInstance().addTodo();
       };
     }
   }
@@ -30,9 +30,9 @@ class TodoEvent {
 
     deleteButton.forEach((deleteButton, index) => {
       deleteButton.onclick = () => {
-        TodoService.getInstance().deleteBtn()
-      }
-    })
+        TodoService.getInstance().deleteBtn(index);
+      };
+    });
   }
 }
 
@@ -73,17 +73,25 @@ class TodoService {
     if (!todoContent) return;
   }
 
-  public addTodoBtn(): void {
+  // 새 Todo를 추가하는 메서드
+  public addTodo(): void {
     const todoInput: HTMLInputElement | null =
-      document.querySelector(".add-todo");
+      document.querySelector(".todo-input");
 
     // 입력값(todoInput)값이 없거나, 공백일 경우 - 함수 종료
     if (!todoInput || !todoInput.value.trim()) return;
+
   }
 
-  public deleteBtn(): void {
-    const deleteBtn: HTMLElement | null = document.querySelector(".delete-todo")
+  public deleteBtn(deleteIndex: number): void {
+    const deleteBtn: HTMLElement | null =
+      document.querySelector(".delete-todo");
 
-
+    if (deleteBtn) {
+      deleteBtn.onclick = () => {
+        TodoService.getInstance().todoList.splice(deleteIndex, 1);
+      }
+      this.uploadTodoList();
+    }
   }
 }
