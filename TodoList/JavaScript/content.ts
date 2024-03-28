@@ -64,15 +64,7 @@ class TodoService {
     localStorage.setItem("todoList", JSON.stringify(this.todoList));
     this.loadTodoList;
   }
-
-  public loadTodoList(): void {
-    const todoContent: HTMLElement | null =
-      document.querySelector(".todo-content");
-
-    // 해당 엘리먼트가 없으면 함수 종료
-    if (!todoContent) return;
-  }
-
+  
   // 새 Todo를 추가하는 메서드
   public addTodo(): void {
     const todoInput: HTMLInputElement | null =
@@ -81,17 +73,47 @@ class TodoService {
     // 입력값(todoInput)값이 없거나, 공백일 경우 - 함수 종료
     if (!todoInput || !todoInput.value.trim()) return;
 
+    const todo: TodoList = {
+      todoContent: todoInput.value,
+      todoTitle: '',
+      done: false
+    }
+
+    this.todoList.push(todo);
+
+    this.uploadTodoList();
+  }
+
+  // 화면에 TodoList를 표시하는 메서드
+  public loadTodoList(): void {
+    const todoContentList: HTMLElement | null =
+      document.querySelector(".todo-content");
+
+    // 해당 엘리먼트가 없으면 함수 종료
+    if (!todoContentList) return;
+
+    todoContentList.innerHTML = ``;
+
+    this.todoList.forEach(todo => {
+      todoContentList.innerHTML = `
+      <div class="content-wrap">
+      <li class="content-list">${todo}</li>
+      <i class="fa-solid fa-xmark"></i>
+    </div>`
+    })
   }
 
   public deleteBtn(deleteIndex: number): void {
-    const deleteBtn: HTMLElement | null =
-      document.querySelector(".delete-todo");
+    const deleteBtn: HTMLElement | null = document.querySelector(".delete-todo");
 
     if (deleteBtn) {
       deleteBtn.onclick = () => {
         TodoService.getInstance().todoList.splice(deleteIndex, 1);
       }
-      this.uploadTodoList();
     }
+    this.uploadTodoList();
+
+    TodoEvent.getInstance().addTodoButton()
+    TodoEvent.getInstance().deleteTodoBtn()
   }
 }

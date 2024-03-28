@@ -11,15 +11,17 @@ var TodoEvent = /** @class */ (function () {
         var addTodoBtn = document.querySelector(".add-todo");
         if (addTodoBtn) {
             addTodoBtn.onclick = function () {
-                TodoService.getInstance().addTodoBtn();
+                TodoService.getInstance().addTodo();
             };
         }
     };
-    TodoEvent.prototype.deleteTodoButton = function () {
-        var deleteTodoBtn = document.querySelector(".delete-todo");
-        deleteTodoBtn.onclick = function () {
-            TodoService.getInstance().deleteTodoBtn();
-        };
+    TodoEvent.prototype.deleteTodoBtn = function () {
+        var deleteButton = document.querySelectorAll(".delete-button");
+        deleteButton.forEach(function (deleteButton, index) {
+            deleteButton.onclick = function () {
+                TodoService.getInstance().deleteBtn(index);
+            };
+        });
     };
     TodoEvent.instance = null;
     return TodoEvent;
@@ -32,7 +34,7 @@ var TodoService = /** @class */ (function () {
         // 그렇지 않으면 [] 빈 배열 할당
         this.todoList = storedTodos ? JSON.parse(storedTodos) : [];
         // 생성 시 todoList를 로드해서 화면에 표시
-        this.loadtodoList();
+        this.loadTodoList();
     }
     TodoService.getInstance = function () {
         if (!this.instance) {
@@ -40,24 +42,44 @@ var TodoService = /** @class */ (function () {
         }
         return this.instance;
     };
-    TodoService.prototype.loadtodoList = function () {
-        var todoContent = document.querySelector(".todo-content");
-        // 해당 엘리먼트가 없으면 함수 종료
-        if (!todoContent)
-            return;
+    TodoService.prototype.uploadTodoList = function () {
+        localStorage.setItem("todoList", JSON.stringify(this.todoList));
+        this.loadTodoList;
     };
-    TodoService.prototype.addTodoBtn = function () {
-        var todoInput = document.querySelector(".add-todo");
+    // 새 Todo를 추가하는 메서드
+    TodoService.prototype.addTodo = function () {
+        var todoInput = document.querySelector(".todo-input");
         // 입력값(todoInput)값이 없거나, 공백일 경우 - 함수 종료
         if (!todoInput || !todoInput.value.trim())
             return;
+        var todo = {
+            todoContent: todoInput.value,
+            todoTitle: '',
+            done: false
+        };
+        this.todoList.push(todo);
+        this.uploadTodoList();
     };
-    TodoService.prototype.deleteTodoBtn = function () {
-        var deleteButton = document.querySelector(".delete-button");
-        deleteButton.forEach(function (deleteBtn, index) {
-            deleteBtn.onclick = function () {
-            };
+    TodoService.prototype.loadTodoList = function () {
+        var todoContentList = document.querySelector(".todo-content");
+        // 해당 엘리먼트가 없으면 함수 종료
+        if (!todoContentList)
+            return;
+        todoContentList.innerHTML = "";
+        this.todoList.forEach(function (todo) {
+            todoContentList.innerHTML = "\n      <div class=\"content-wrap\">\n      <li class=\"content-list\"></li>\n      <i class=\"fa-solid fa-xmark\"></i>\n    </div>";
         });
+    };
+    TodoService.prototype.deleteBtn = function (deleteIndex) {
+        var deleteBtn = document.querySelector(".delete-todo");
+        if (deleteBtn) {
+            deleteBtn.onclick = function () {
+                TodoService.getInstance().todoList.splice(deleteIndex, 1);
+            };
+            this.uploadTodoList();
+        }
+        TodoEvent.getInstance().addTodoButton();
+        TodoEvent.getInstance().deleteTodoBtn();
     };
     TodoService.instance = null;
     return TodoService;
