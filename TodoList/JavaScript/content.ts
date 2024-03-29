@@ -15,7 +15,7 @@ class TodoEvent {
     return this.instance;
   }
 
-  addTodoButton(): void {
+  public addTodoButton(): void {
     const addTodoBtn: HTMLElement | null = document.querySelector(".add-todo");
     if (addTodoBtn) {
       addTodoBtn.onclick = () => {
@@ -98,7 +98,9 @@ class TodoService {
       todoContentList.innerHTML = `
       <div class="content-wrap">
       <li class="content-list">${todo}</li>
-      <i class="fa-solid fa-xmark"></i>
+      <button class="delete-btn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>`
     })
   }
@@ -112,6 +114,7 @@ class TodoService {
       }
     }
     this.uploadTodoList();
+    this.loadTodoList();
 
     TodoEvent.getInstance().addTodoButton()
     TodoEvent.getInstance().deleteTodoBtn()
