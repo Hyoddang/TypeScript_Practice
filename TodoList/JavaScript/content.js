@@ -44,31 +44,21 @@ var TodoService = /** @class */ (function () {
     };
     TodoService.prototype.uploadTodoList = function () {
         localStorage.setItem("todoList", JSON.stringify(this.todoList));
-        this.loadTodoList;
+        this.loadTodoList();
     };
     // 새 Todo를 추가하는 메서드
     TodoService.prototype.addTodo = function () {
-        var todoInput = document.querySelector(".todo-input");
+        var todoInput = document.querySelector(".input");
         // 입력값(todoInput)값이 없거나, 공백일 경우 - 함수 종료
         if (!todoInput || !todoInput.value.trim())
             return;
         var todo = {
             todoContent: todoInput.value,
-            todoTitle: '',
-            done: false
+            todoTitle: "",
+            done: false,
         };
         this.todoList.push(todo);
         this.uploadTodoList();
-    };
-    TodoService.prototype.loadTodoList = function () {
-        var todoContentList = document.querySelector(".todo-content");
-        // 해당 엘리먼트가 없으면 함수 종료
-        if (!todoContentList)
-            return;
-        todoContentList.innerHTML = "";
-        this.todoList.forEach(function (todo) {
-            todoContentList.innerHTML = "\n      <div class=\"content-wrap\">\n      <li class=\"content-list\"></li>\n      <i class=\"fa-solid fa-xmark\"></i>\n    </div>";
-        });
     };
     TodoService.prototype.deleteBtn = function (deleteIndex) {
         var deleteBtn = document.querySelector(".delete-todo");
@@ -76,8 +66,20 @@ var TodoService = /** @class */ (function () {
             deleteBtn.onclick = function () {
                 TodoService.getInstance().todoList.splice(deleteIndex, 1);
             };
-            this.uploadTodoList();
         }
+        this.uploadTodoList();
+        this.loadTodoList();
+    };
+    // 화면에 TodoList를 표시하는 메서드
+    TodoService.prototype.loadTodoList = function () {
+        var todoContentList = document.querySelector(".todo-content");
+        // 해당 엘리먼트가 없으면 함수 종료
+        if (!todoContentList)
+            return;
+        todoContentList.innerHTML = "";
+        this.todoList.forEach(function (todo) {
+            todoContentList.innerHTML += "\n      <div class=\"content-wrap\">\n      <li class=\"content-list\">".concat(todo.todoContent, "</li>\n      <button class=\"delete-btn\">\n        <i class=\"fa-solid fa-xmark\"></i>\n      </button>\n    </div>");
+        });
         TodoEvent.getInstance().addTodoButton();
         TodoEvent.getInstance().deleteTodoBtn();
     };
