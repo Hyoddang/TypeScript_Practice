@@ -16,7 +16,7 @@ var TodoEvent = /** @class */ (function () {
         }
     };
     TodoEvent.prototype.deleteTodoBtn = function () {
-        var deleteButton = document.querySelectorAll(".delete-button");
+        var deleteButton = document.querySelectorAll(".content-wrap .delete-button");
         deleteButton.forEach(function (deleteButton, index) {
             deleteButton.onclick = function () {
                 TodoService.getInstance().deleteBtn(index);
@@ -59,6 +59,7 @@ var TodoService = /** @class */ (function () {
         };
         this.todoList.push(todo);
         this.uploadTodoList();
+        this.loadTodoList();
     };
     TodoService.prototype.deleteBtn = function (deleteIndex) {
         var deleteBtn = document.querySelector(".delete-todo");

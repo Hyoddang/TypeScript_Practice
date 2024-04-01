@@ -24,9 +24,22 @@ class TodoEvent {
     }
   }
 
+  public addTodoKeyEvent(): void {
+    const todoInput: HTMLElement | null = document.querySelector('.input');
+
+    if (todoInput) {
+      todoInput.onkeyup = (event:KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          const addTodoButton: HTMLElement | null = document.querySelector('.add-todo');
+          addTodoButton?.click();
+        }
+      }
+    }
+  }
+
   public deleteTodoBtn(): void {
     const deleteButton: NodeListOf<HTMLElement> =
-      document.querySelectorAll(".delete-button");
+      document.querySelectorAll(".content-wrap .delete-button");
 
     deleteButton.forEach((deleteButton, index) => {
       deleteButton.onclick = () => {
@@ -82,6 +95,7 @@ class TodoService {
     this.todoList.push(todo);
 
     this.uploadTodoList();
+    this.loadTodoList();
   }
 
   public deleteBtn(deleteIndex: number): void {
