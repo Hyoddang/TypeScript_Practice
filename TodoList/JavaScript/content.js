@@ -15,8 +15,19 @@ var TodoEvent = /** @class */ (function () {
             };
         }
     };
+    TodoEvent.prototype.addTodoKeyEvent = function () {
+        var todoInput = document.querySelector('.input-content');
+        if (todoInput) {
+            todoInput.onkeyup = function (event) {
+                if (event.key === 'Enter') {
+                    var addTodoButton = document.querySelector('.add-todo');
+                    addTodoButton === null || addTodoButton === void 0 ? void 0 : addTodoButton.click();
+                }
+            };
+        }
+    };
     TodoEvent.prototype.deleteTodoBtn = function () {
-        var deleteButton = document.querySelectorAll(".content-wrap .delete-button");
+        var deleteButton = document.querySelectorAll(".delete-btn");
         deleteButton.forEach(function (deleteButton, index) {
             deleteButton.onclick = function () {
                 TodoService.getInstance().deleteBtn(index);
@@ -48,7 +59,7 @@ var TodoService = /** @class */ (function () {
     };
     // 새 Todo를 추가하는 메서드
     TodoService.prototype.addTodo = function () {
-        var todoInput = document.querySelector(".input");
+        var todoInput = document.querySelector(".input-content");
         // 입력값(todoInput)값이 없거나, 공백일 경우 - 함수 종료
         if (!todoInput || !todoInput.value.trim())
             return;
@@ -61,15 +72,22 @@ var TodoService = /** @class */ (function () {
         this.uploadTodoList();
         this.loadTodoList();
     };
-    TodoService.prototype.deleteBtn = function (deleteIndex) {
-        var deleteBtn = document.querySelector(".delete-todo");
-        if (deleteBtn) {
-            deleteBtn.onclick = function () {
-                TodoService.getInstance().todoList.splice(deleteIndex, 1);
-            };
-        }
+    //! 수정 전 deleteBtn
+    // public deleteBtn(index: number): void {
+    //   const deleteBtn: HTMLElement | null =
+    //     document.querySelector(".delete-btn");
+    //   if (deleteBtn) {
+    //     deleteBtn.onclick = () => {
+    //       TodoService.getInstance().todoList.splice(index, 1);
+    //     };
+    //     this.uploadTodoList();
+    //   }
+    //   this.loadTodoList();
+    // }
+    //! 수정 후 deleteBtn
+    TodoService.prototype.deleteBtn = function (index) {
+        this.todoList.splice(index, 1);
         this.uploadTodoList();
-        this.loadTodoList();
     };
     // 화면에 TodoList를 표시하는 메서드
     TodoService.prototype.loadTodoList = function () {

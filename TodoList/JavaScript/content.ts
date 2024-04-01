@@ -25,7 +25,7 @@ class TodoEvent {
   }
 
   public addTodoKeyEvent(): void {
-    const todoInput: HTMLElement | null = document.querySelector('.input');
+    const todoInput: HTMLElement | null = document.querySelector('.input-content');
 
     if (todoInput) {
       todoInput.onkeyup = (event:KeyboardEvent) => {
@@ -39,7 +39,7 @@ class TodoEvent {
 
   public deleteTodoBtn(): void {
     const deleteButton: NodeListOf<HTMLElement> =
-      document.querySelectorAll(".content-wrap .delete-button");
+      document.querySelectorAll(".delete-btn");
 
     deleteButton.forEach((deleteButton, index) => {
       deleteButton.onclick = () => {
@@ -81,7 +81,7 @@ class TodoService {
   // 새 Todo를 추가하는 메서드
   public addTodo(): void {
     const todoInput: HTMLInputElement | null =
-      document.querySelector(".input");
+      document.querySelector(".input-content");
 
     // 입력값(todoInput)값이 없거나, 공백일 경우 - 함수 종료
     if (!todoInput || !todoInput.value.trim()) return;
@@ -98,17 +98,24 @@ class TodoService {
     this.loadTodoList();
   }
 
-  public deleteBtn(deleteIndex: number): void {
-    const deleteBtn: HTMLElement | null =
-      document.querySelector(".delete-todo");
+  //! 수정 전 deleteBtn
+  // public deleteBtn(index: number): void {
+  //   const deleteBtn: HTMLElement | null =
+  //     document.querySelector(".delete-btn");
 
-    if (deleteBtn) {
-      deleteBtn.onclick = () => {
-        TodoService.getInstance().todoList.splice(deleteIndex, 1);
-      };
-    }
+  //   if (deleteBtn) {
+  //     deleteBtn.onclick = () => {
+  //       TodoService.getInstance().todoList.splice(index, 1);
+  //     };
+  //     this.uploadTodoList();
+  //   }
+  //   this.loadTodoList();
+  // }
+
+  //! 수정 후 deleteBtn
+  public deleteBtn(index: number): void {
+    this.todoList.splice(index, 1);
     this.uploadTodoList();
-    this.loadTodoList();
   }
 
   // 화면에 TodoList를 표시하는 메서드
