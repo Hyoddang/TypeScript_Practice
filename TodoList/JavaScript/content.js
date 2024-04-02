@@ -12,9 +12,15 @@ var TodoEvent = /** @class */ (function () {
         if (addTodoBtn) {
             addTodoBtn.onclick = function () {
                 TodoService.getInstance().addTodo();
+                //* input 입력 값 초기화
+                var todoInput = document.querySelector(".input-content");
+                if (todoInput) {
+                    todoInput.value = '';
+                }
             };
         }
     };
+    //* keyboard 이벤트 리스너
     TodoEvent.prototype.addTodoKeyEvent = function () {
         var todoInput = document.querySelector('.input-content');
         if (todoInput) {

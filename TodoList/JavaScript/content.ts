@@ -20,10 +20,17 @@ class TodoEvent {
     if (addTodoBtn) {
       addTodoBtn.onclick = () => {
         TodoService.getInstance().addTodo();
+
+        //* input 입력 값 초기화
+        const todoInput: HTMLInputElement | null = document.querySelector(".input-content");
+          if (todoInput) {
+            todoInput.value = '';
+        }
       };
     }
   }
 
+  //* keyboard 이벤트 리스너
   public addTodoKeyEvent(): void {
     const todoInput: HTMLElement | null = document.querySelector('.input-content');
 

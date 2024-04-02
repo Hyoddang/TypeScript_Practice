@@ -95,6 +95,10 @@
   cursor: pointer;
 }
 
+.fa-xmark:hover {
+  color: #ff0000;
+}
+
 .fa-xmark {
   font-size: 20px;
 }
