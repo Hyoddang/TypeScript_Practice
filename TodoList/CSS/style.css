@@ -38,7 +38,7 @@
   padding: 0px 10px;
 }
 
-.input {
+.input-content {
   padding: 0;
   margin: 0;
   height: 36px;
@@ -51,7 +51,7 @@
   color: #aaaaaa;
 }
 
-.input:focus {
+.input-content:focus {
   outline: none;
   background-color: #f7f7f7;
 }
