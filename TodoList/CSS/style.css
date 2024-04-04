@@ -70,19 +70,31 @@
   background-color: none;
 }
 
+.todo-content-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 20px 20px 20px;
+  width: 100%;
+  height: 85%;
+
+  /* 리스트 높이가 초과될 때 스크롤바 표시 */
+  overflow-y: auto;
+}
+
 .todo-content {
-  margin: 20px 10px 0 10px;
+  margin: 0px 10px 0 10px;
 }
 
 .content-wrap {
   display: flex;
   background-color: #f0f0f0;
   margin-bottom: 10px;
+  width: 515px;
   height: 50px;
   align-items: center;
   justify-content: space-between;
   padding: 0px 15px 0px 15px;
-  transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .content-wrap:hover {

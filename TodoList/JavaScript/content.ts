@@ -80,6 +80,7 @@ class TodoService {
     this.loadTodoList();
   }
 
+  // 로컬 스토리지 업데이트, todoList 다시 로드하는 메서드
   public uploadTodoList(): void {
     localStorage.setItem("todoList", JSON.stringify(this.todoList));
     this.loadTodoList();
@@ -105,7 +106,7 @@ class TodoService {
     this.loadTodoList();
   }
 
-  //! 수정 전 deleteBtn
+  // ! 수정 전 deleteBtn
   // public deleteBtn(index: number): void {
   //   const deleteBtn: HTMLElement | null =
   //     document.querySelector(".delete-btn");
@@ -145,6 +146,7 @@ class TodoService {
     </div>`;
     });
 
+    //? Todo 항목의 추가, 삭제 버튼에 이벤트 추가
     TodoEvent.getInstance().addTodoButton();
     TodoEvent.getInstance().deleteTodoBtn();
   }

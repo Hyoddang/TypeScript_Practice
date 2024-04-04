@@ -59,6 +59,7 @@ var TodoService = /** @class */ (function () {
         }
         return this.instance;
     };
+    // 로컬 스토리지 업데이트, todoList 다시 로드하는 메서드
     TodoService.prototype.uploadTodoList = function () {
         localStorage.setItem("todoList", JSON.stringify(this.todoList));
         this.loadTodoList();
@@ -78,7 +79,7 @@ var TodoService = /** @class */ (function () {
         this.uploadTodoList();
         this.loadTodoList();
     };
-    //! 수정 전 deleteBtn
+    // ! 수정 전 deleteBtn
     // public deleteBtn(index: number): void {
     //   const deleteBtn: HTMLElement | null =
     //     document.querySelector(".delete-btn");
