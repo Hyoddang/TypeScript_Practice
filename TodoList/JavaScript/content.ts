@@ -45,14 +45,24 @@ class TodoEvent {
   }
 
   public deleteTodoBtn(): void {
-    const deleteButton: NodeListOf<HTMLElement> =
+    const deleteButtons: NodeListOf<HTMLElement> =
       document.querySelectorAll(".delete-btn");
 
-    deleteButton.forEach((deleteButton, index) => {
+    deleteButtons.forEach((deleteButton, index) => {
       deleteButton.onclick = () => {
         TodoService.getInstance().deleteBtn(index);
       };
     });
+  }
+
+  public checkBtn(): void {
+    const checkButtons: NodeListOf<HTMLElement> = document.querySelectorAll(".checkBtn")
+
+    checkButtons.forEach((checnkButton, index) => {
+      checnkButton.onclick = () => {
+        TodoService.getInstance().checkBtn(index)
+      }
+    })
   }
 }
 
@@ -126,6 +136,15 @@ class TodoService {
     this.uploadTodoList();
   }
 
+  // 체크버튼 클릭 시 초록색으로 전환하는 함수
+  public checkBtn(index: number): void {
+    const checkButtons: NodeListOf<HTMLElement> = document.querySelectorAll(".checkBtn")
+
+    checkButtons.forEach((checkBtn, i) => {
+      
+    })
+  }
+
   // 화면에 TodoList를 표시하는 메서드
   public loadTodoList(): void {
     const todoContentList: HTMLElement | null =
@@ -139,10 +158,17 @@ class TodoService {
     this.todoList.forEach((todo) => {
       todoContentList.innerHTML += `
       <div class="content-wrap">
-      <li class="content-list">${todo.todoContent}</li>
-      <button class="delete-btn">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <li class="content-list">
+        ${todo.todoContent}
+      </li>
+      <div class="button-wrap">
+        <button class="finish-btn">
+          <i class="fa-solid fa-check checkBtn"></i>
+        </button>
+        <button class="delete-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
     </div>`;
     });
 

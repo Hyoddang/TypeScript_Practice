@@ -33,10 +33,18 @@ var TodoEvent = /** @class */ (function () {
         }
     };
     TodoEvent.prototype.deleteTodoBtn = function () {
-        var deleteButton = document.querySelectorAll(".delete-btn");
-        deleteButton.forEach(function (deleteButton, index) {
+        var deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach(function (deleteButton, index) {
             deleteButton.onclick = function () {
                 TodoService.getInstance().deleteBtn(index);
+            };
+        });
+    };
+    TodoEvent.prototype.checkBtn = function () {
+        var checkButtons = document.querySelectorAll(".finish-btn");
+        checkButtons.forEach(function (checnkButton, index) {
+            checnkButton.onclick = function () {
+                TodoService.getInstance().checkBtn(index);
             };
         });
     };
@@ -96,6 +104,23 @@ var TodoService = /** @class */ (function () {
         this.todoList.splice(index, 1);
         this.uploadTodoList();
     };
+    TodoService.prototype.checkBtn = function (index) {
+        var checkButtons = document.querySelectorAll(".fa-check");
+        checkButtons.forEach(function (checkButton, i) {
+            if (i === index) {
+                var done_1 = false;
+                checkButton.onclick = function () {
+                    done_1 = !done_1;
+                    if (done_1) {
+                        checkButton.style.color = 'green';
+                    }
+                    else {
+                        checkButton.style.color = 'black';
+                    }
+                };
+            }
+        });
+    };
     // 화면에 TodoList를 표시하는 메서드
     TodoService.prototype.loadTodoList = function () {
         var todoContentList = document.querySelector(".todo-content");
@@ -104,8 +129,9 @@ var TodoService = /** @class */ (function () {
             return;
         todoContentList.innerHTML = "";
         this.todoList.forEach(function (todo) {
-            todoContentList.innerHTML += "\n      <div class=\"content-wrap\">\n      <li class=\"content-list\">".concat(todo.todoContent, "</li>\n      <button class=\"delete-btn\">\n        <i class=\"fa-solid fa-xmark\"></i>\n      </button>\n    </div>");
+            todoContentList.innerHTML += "\n      <div class=\"content-wrap\">\n      <li class=\"content-list\">\n        ".concat(todo.todoContent, "\n      </li>\n      <div class=\"button-wrap\">\n        <button class=\"finish-btn\">\n          <i class=\"fa-solid fa-check\" id=\"checkBtn\"></i>\n        </button>\n        <button class=\"delete-btn\">\n          <i class=\"fa-solid fa-xmark\"></i>\n        </button>\n      </div>\n    </div>");
         });
+        //? Todo 항목의 추가, 삭제 버튼에 이벤트 추가
         TodoEvent.getInstance().addTodoButton();
         TodoEvent.getInstance().deleteTodoBtn();
     };
