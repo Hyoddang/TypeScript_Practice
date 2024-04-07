@@ -3,7 +3,7 @@ a {
 }
 
 body {
-  background-color: #dddddd;
+  background-color: #ebebeb;
 }
 
 /* header 영역 스타일링 */
@@ -75,13 +75,16 @@ body {
 /* main 영역 스타일링 */
 
 main {
-  margin: 0px 50px 0px 50px;
+  margin: 0px 300px 0px 300px;
   padding-top: 70px;
   display: grid;
   grid-template-columns: 350px 350px 350px;
   grid-template-rows: 270px 270px 270px;
   justify-content: center;
   justify-items: center;
+  border-left: 1px solid #8a8a8a;
+  border-right: 1px solid #8a8a8a;
+  background-color: white;
 }
 
 .img-container {
@@ -93,6 +96,8 @@ main {
   flex-direction: column;
   border: 1px solid #8a8a8a;
   transition: box-shadow 0.3s ease;
+  background-color: #f7f7f7;
+  border-radius: 5px;
 }
 
 .img-container:hover {

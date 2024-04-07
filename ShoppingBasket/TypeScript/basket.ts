@@ -1,7 +1,4 @@
 interface Basket {
-  
+  itemSum: number;
 }
 
-const BaketService: void {
-
-}
