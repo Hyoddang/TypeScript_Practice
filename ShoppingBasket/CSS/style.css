@@ -1,0 +1,26 @@
+a {
+  color: black;
+}
+
+/* header 부분 스타일링 */
+
+.header-wrap {
+  margin: 0;
+  height: 50px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.navwrap {
+  display: flex;
+}
+
+.navwrap li {
+  font-size: 22px;
+  padding: 0px 30px 0 30px;
+}
