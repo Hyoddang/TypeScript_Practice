@@ -120,4 +120,5 @@ main {
 
 .item-description {
   margin-top: 3px;
+  color: rgba(0, 0, 0, 0.5);
 }
