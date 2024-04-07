@@ -110,9 +110,14 @@ main {
   border-radius: 5px;
   background-color: #dddddd;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 .img-container button:hover {
   background-color: rgb(68, 68, 68);
   color: white;
+}
+
+.item-description {
+  margin-top: 3px;
 }
