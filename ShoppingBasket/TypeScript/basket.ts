@@ -4,7 +4,7 @@ interface Basket {
 
 //? 버튼 클릭 시 hidden 태그 on 메서드
 //? 버튼 클릭 이벤트 설정 ( 누를 때마다 +1 ) O
-//? 9개가 넘어가면 9+로 표시
+//? 9개가 넘어가면 9+로 표시 O
 
 class addEvent {
   private static instance: addEvent | null = null;
@@ -79,8 +79,14 @@ class addService {
   public loadShoppingList(): void {
     const loadList: HTMLElement | null = document.querySelector(".sum-item")
 
-    if (!loadList) return ;
+    if (!loadList) {
+      return;
+    }
 
-    loadList.innerHTML += `${this.basketList.length + 1}`
+    if (this.basketList.length > 9) {
+      loadList.innerHTML = '9+';
+    } else {
+      loadList.innerHTML = `${this.basketList.length + 1}`;
+    }
   }
 }
