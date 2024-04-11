@@ -1,8 +1,9 @@
 interface Basket {
+  // itemName: string;
   itemNum: number;
 }
 
-//? 버튼 클릭 시 hidden 태그 on 메서드
+//? 버튼 클릭 시 hidden 태그 off 메서드
 //? 버튼 클릭 이벤트 설정 ( 누를 때마다 +1 ) O
 //? 9개가 넘어가면 9+로 표시 O
 
@@ -30,7 +31,9 @@ class addEvent {
     const removeHidden: HTMLElement | null = document.querySelector(".sum-container")
 
     if (removeHidden) {
-      
+      removeHidden.onclick = () => {
+        addService.getInstance().hiddenRemove();
+      }
     }
   }
 }
@@ -70,6 +73,16 @@ class addService {
     }
   }
 
+  public hiddenRemove(): void {
+    const clickToRemove: HTMLElement | null = document.querySelector(".add-item-btn")
+
+    const deleteRemove: HTMLElement | null = document.querySelector(".sum-container")
+
+    if (this.basketList.length >= 1) {
+      deleteRemove?.classList.remove(".sum-hidden");
+    }
+  }
+
   public uploadShoppingList(): void {
     localStorage.setItem("basketList", JSON.stringify(this.basketList))
 
@@ -79,9 +92,7 @@ class addService {
   public loadShoppingList(): void {
     const loadList: HTMLElement | null = document.querySelector(".sum-item")
 
-    if (!loadList) {
-      return;
-    }
+    if (!loadList) return;
 
     if (this.basketList.length > 9) {
       loadList.innerHTML = '9+';
