@@ -3,7 +3,7 @@ a {
 }
 
 body {
-  background-color: #ebebeb;
+  background-color: #fffbee;
 }
 
 /* header 영역 스타일링 */
@@ -82,9 +82,6 @@ main {
   grid-template-rows: 270px 270px 270px;
   justify-content: center;
   justify-items: center;
-  border-left: 1px solid #8a8a8a;
-  border-right: 1px solid #8a8a8a;
-  background-color: white;
 }
 
 .img-container {

@@ -44,6 +44,7 @@ var addService = /** @class */ (function () {
     addService.prototype.addBtnClick = function () {
         var _this = this;
         var addBtn = document.querySelector(".add-item-btn");
+        var item = document.querySelector(".item-name");
         var basket = {
             itemNum: this.basketList.length
         };
@@ -52,12 +53,13 @@ var addService = /** @class */ (function () {
                 _this.basketList.push(basket);
             };
         }
+        this.uploadShoppingList();
     };
     addService.prototype.hiddenRemove = function () {
         var clickToRemove = document.querySelector(".add-item-btn");
         var deleteRemove = document.querySelector(".sum-container");
         if (this.basketList.length >= 1) {
-            deleteRemove === null || deleteRemove === void 0 ? void 0 : deleteRemove.classList.remove(".sum-hidden");
+            deleteRemove === null || deleteRemove === void 0 ? void 0 : deleteRemove.classList.remove("sum-hidden");
         }
     };
     addService.prototype.uploadShoppingList = function () {
@@ -72,8 +74,9 @@ var addService = /** @class */ (function () {
             loadList.innerHTML = '9+';
         }
         else {
-            loadList.innerHTML = "".concat(this.basketList.length + 1);
+            loadList.innerHTML = "<p class=\"sum-item\">".concat(this.basketList.length, "</p>");
         }
+        addEvent.getInstance().addButton();
     };
     addService.instance = null;
     return addService;

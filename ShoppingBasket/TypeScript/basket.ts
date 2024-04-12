@@ -62,15 +62,15 @@ class addService {
   public addBtnClick(): void {
     const addBtn: HTMLElement | null = document.querySelector(".add-item-btn");
 
+    // const item: HTMLElement | null = document.querySelector(".item-name")
+
     const basket: Basket = {
       itemNum: this.basketList.length
     }
     
-    if (addBtn) {
-      addBtn.onclick = () => {
-        this.basketList.push(basket)
-      }
-    }
+    this.basketList.push(basket);
+    
+    this.uploadShoppingList();
   }
 
   public hiddenRemove(): void {
@@ -79,7 +79,7 @@ class addService {
     const deleteRemove: HTMLElement | null = document.querySelector(".sum-container")
 
     if (this.basketList.length >= 1) {
-      deleteRemove?.classList.remove(".sum-hidden");
+      deleteRemove?.classList.remove("sum-hidden");
     }
   }
 
@@ -97,7 +97,9 @@ class addService {
     if (this.basketList.length > 9) {
       loadList.innerHTML = '9+';
     } else {
-      loadList.innerHTML = `${this.basketList.length + 1}`;
+      loadList.innerHTML = `<p class="sum-item">${this.basketList.length}</p>`;
     }
+
+    addEvent.getInstance().addButton();
   }
 }
