@@ -3,7 +3,7 @@ interface Basket {
   itemNum: number;
 }
 
-//? 버튼 클릭 시 hidden 태그 off 메서드
+//? 버튼 클릭 시 hidden 태그 remove 메서드
 //? 버튼 클릭 이벤트 설정 ( 누를 때마다 +1 ) O
 //? 9개가 넘어가면 9+로 표시 O
 
@@ -95,7 +95,7 @@ class addService {
     if (!loadList) return;
 
     if (this.basketList.length > 9) {
-      loadList.innerHTML = '9+';
+      loadList.innerHTML = `<p class="sum-item">9+</p>`;
     } else {
       loadList.innerHTML = `<p class="sum-item">${this.basketList.length}</p>`;
     }

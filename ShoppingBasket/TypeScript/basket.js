@@ -1,4 +1,4 @@
-//? 버튼 클릭 시 hidden 태그 off 메서드
+//? 버튼 클릭 시 hidden 태그 remove 메서드
 //? 버튼 클릭 이벤트 설정 ( 누를 때마다 +1 ) O
 //? 9개가 넘어가면 9+로 표시 O
 var addEvent = /** @class */ (function () {
@@ -42,17 +42,12 @@ var addService = /** @class */ (function () {
         return this.instance;
     };
     addService.prototype.addBtnClick = function () {
-        var _this = this;
         var addBtn = document.querySelector(".add-item-btn");
-        var item = document.querySelector(".item-name");
+        // const item: HTMLElement | null = document.querySelector(".item-name")
         var basket = {
             itemNum: this.basketList.length
         };
-        if (addBtn) {
-            addBtn.onclick = function () {
-                _this.basketList.push(basket);
-            };
-        }
+        this.basketList.push(basket);
         this.uploadShoppingList();
     };
     addService.prototype.hiddenRemove = function () {
@@ -71,7 +66,7 @@ var addService = /** @class */ (function () {
         if (!loadList)
             return;
         if (this.basketList.length > 9) {
-            loadList.innerHTML = '9+';
+            loadList.innerHTML = "<p class=\"sum-item\">9+</p>";
         }
         else {
             loadList.innerHTML = "<p class=\"sum-item\">".concat(this.basketList.length, "</p>");
