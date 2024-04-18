@@ -42,19 +42,27 @@ var addService = /** @class */ (function () {
         return this.instance;
     };
     addService.prototype.addBtnClick = function () {
+        var _this = this;
         var addBtn = document.querySelector(".add-item-btn");
         // const item: HTMLElement | null = document.querySelector(".item-name")
         var basket = {
-            itemNum: this.basketList.length
+            itemNum: this.basketList.length,
         };
-        this.basketList.push(basket);
-        this.uploadShoppingList();
+        if (addBtn) {
+            addBtn.onclick = function () {
+                _this.basketList.push(basket);
+            };
+            this.uploadShoppingList();
+        }
     };
     addService.prototype.hiddenRemove = function () {
-        var clickToRemove = document.querySelector(".add-item-btn");
+        // const clickToRemove: HTMLElement | null = document.querySelector(".add-item-btn")
         var deleteRemove = document.querySelector(".sum-container");
         if (this.basketList.length >= 1) {
             deleteRemove === null || deleteRemove === void 0 ? void 0 : deleteRemove.classList.remove("sum-hidden");
+        }
+        else {
+            deleteRemove === null || deleteRemove === void 0 ? void 0 : deleteRemove.classList.add("sum-hidden");
         }
     };
     addService.prototype.uploadShoppingList = function () {
@@ -66,12 +74,13 @@ var addService = /** @class */ (function () {
         if (!loadList)
             return;
         if (this.basketList.length > 9) {
-            loadList.innerHTML = "<p class=\"sum-item\">9+</p>";
+            loadList.innerHTML += "<p class=\"sum-item\">9+</p>";
         }
         else {
-            loadList.innerHTML = "<p class=\"sum-item\">".concat(this.basketList.length, "</p>");
+            loadList.innerHTML += "<p class=\"sum-item\">".concat(this.basketList.length, "</p>");
         }
         addEvent.getInstance().addButton();
+        addEvent.getInstance().hiddenRemove();
     };
     addService.instance = null;
     return addService;
