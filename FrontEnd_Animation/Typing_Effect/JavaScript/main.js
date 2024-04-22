@@ -1,0 +1,2 @@
+const stringArr = [];
+const Arr = '';
