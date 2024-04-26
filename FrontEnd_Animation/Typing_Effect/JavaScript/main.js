@@ -1,2 +1,0 @@
-const stringArr = [];
-const Arr = '';
