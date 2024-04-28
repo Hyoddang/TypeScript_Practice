@@ -9,18 +9,15 @@ let selectString = stringArr[currentIndex];
 let selectStringArr = selectString.split("");
 
 function nextStr() {
-  let stringArr = ["안녕하세요.", "프론트엔드 개발자를 꿈 꾸는", "Hyo 입니다."];
-
-  let currentIndex = 0;
-
   let selectString = stringArr[currentIndex];
 
   let selectStringArr = selectString.split("");
 
-  if (currentIndex === stringArr.length) {
+  currentIndex++;
+
+  if (currentIndex >= stringArr.length) {
     currentIndex = 0;
-  }
-  return selectStringArr;
+  } return selectStringArr;
 }
 
 // 타이핑효과 리셋
